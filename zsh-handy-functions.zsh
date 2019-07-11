@@ -8,12 +8,23 @@ function rf() {
         find . -iname "*$1*"
     fi
 }
+
 # Swap content between two files
 function swap() {
     local TMPFILE=tmp.$$
     mv "$1" $TMPFILE && mv "$2" "$1" && mv $TMPFILE $2
 }
+
 # Short manual or TLDR
 function sman() {
     curl cheat.sh/$1
+}
+
+# preview manual in pdf
+function pman() {
+    if [[ $OSTYPE == darwin* ]]; then
+        man -t "$@" | open -f -a Preview
+    else
+        echo "Not supported."
+    fi
 }
